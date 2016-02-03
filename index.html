@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    Hola món! Mira la consola
+
+    <script>
+    
+        var stateObj = { foo: "bar" };
+        history.pushState(stateObj, "page 2", "bar.html");
+
+        //Using functions and module
+        var names = ["Sunday", "Monday", "Tuesday", "Wednesday","Thursday", "Friday", "Saturday"];
+        function dayName(number) {
+          return names[number];
+        }
+        console.log(dayName(6));
+
+        var dayName = function() {
+          var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+                       "Thursday", "Friday", "Saturday"];
+          return function(number) {
+            return names[number];
+          };
+        }();
+        console.log(dayName(12-6));
+
+        (function() {
+          function square(x) { return x * x; }
+          var hundred = 100;
+
+          console.log(square(hundred));
+        })();
+
+        var weekDay = function() {
+          var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+                       "Thursday", "Friday", "Saturday"];
+          return {
+            name: function(number) { return names[number]; },
+            number: function(name) { return names.indexOf(name); }
+          };
+        }();
+
+        console.log(weekDay.name(weekDay.number("Sunday")));
+
+        (function(exports) {
+          var names = ["Sunday", "Monday", "Tuesday", "Wednesday",
+                       "Thursday", "Friday", "Saturday"];
+
+          exports.name = function(number) {
+            return names[number];
+          };
+          exports.number = function(name) {
+            return names.indexOf(name);
+          };
+        })(this.weekDay = {});
+
+        console.log(weekDay.name(weekDay.number("Saturday")));
+
+        function evalAndReturnX(code) {
+          eval(code);
+          return x;
+        }
+
+        console.log(evalAndReturnX("var x = 2"));
+
+        var Mymodule = (function(){
+            var stateObj = { foo: "bar" };
+            var privateMethod = function () {
+                console.log('privateMethode');
+            };
+            return {
+                myPublicPropierty: "PropietatPublica",
+                publicMethodOne: function () {
+                    console.log('publicMethodeOneo');
+                },
+                publicMethodTwo: function () {
+                    console.log('publicMethodeTwo');
+                }
+            }
+        }());
+        console.debug(Mymodule.stateObj);
+        console.debug(Mymodule.myPublicPropierty);
+        console.debug(Mymodule.publicMethodOne);
+        console.debug(Mymodule.publicMethodTwo);        
+
+    </script>
+</body>
+</html>
